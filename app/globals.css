@@ -2,26 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #111827;
+    --card: #ffffff;
+    --card-foreground: #111827;
+    --primary: #d87943;
+    --primary-foreground: #ffffff;
+    --secondary: #527575;
+    --secondary-foreground: #ffffff;
+    --muted: #f3f4f6;
+    --muted-foreground: #6b7280;
+    --accent: #eeeeee;
+    --accent-foreground: #111827;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: #d87943;
+    --destructive: #ef4444;
+    --destructive-foreground: #fafafa;
+    --sidebar: #f3f4f6;
+    --sidebar-foreground: #111827;
+    --sidebar-border: #e5e7eb;
+    --sidebar-primary: #d87943;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: #121113;
+    --foreground: #c1c1c1;
+    --card: #121212;
+    --card-foreground: #c1c1c1;
+    --primary: #e78a53;
+    --primary-foreground: #121113;
+    --secondary: #5f8787;
+    --secondary-foreground: #ffffff;
+    --muted: #222222;
+    --muted-foreground: #888888;
+    --accent: #222222;
+    --accent-foreground: #c1c1c1;
+    --border: #222222;
+    --input: #222222;
+    --ring: #e78a53;
+    --destructive: #5f8787;
+    --destructive-foreground: #fafafa;
+    --sidebar: #181719;
+    --sidebar-foreground: #c1c1c1;
+    --sidebar-border: #222222;
+    --sidebar-primary: #e78a53;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Mode Layar Biasa: Sembunyikan portal cetak */
+#receipt-portal-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Sembunyikan seluruh UI web aplikasi */
+  #app-root,
+  header,
+  nav,
+  aside,
+  section,
+  main,
+  button,
+  input,
+  .print-hidden,
+  [data-print-hidden] {
+    display: none !important;
+  }
+
+  /* Tampilkan HANYA portal struk dan struk thermal */
+  #receipt-portal-root {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 80mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  #receipt-portal-root * {
+    visibility: visible !important;
+    color: #000000 !important;
+  }
+
+  #receipt-print-area {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 80mm !important;
+    margin: 0 auto !important;
+    padding: 4px 8px !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  #receipt-print-area * {
+    visibility: visible !important;
   }
 }
+
+
